@@ -1,33 +1,64 @@
 .app {
-    background: url('./assets/unitygrid.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    background-attachment: fixed;
-}
-
-header {
-    padding: 50px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .main-header {
-    height: 30vh;
-    width: 85vw;
-    align-items: flex-end;
-    position: relative;
-    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem clamp(1rem, 4vw, 3rem);
+    border-bottom: 1px solid var(--glass-border);
+    background: rgba(10, 19, 48, 0.55);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    text-decoration: none;
+}
+
+.brand img {
+    width: 52px;
+    height: 52px;
+}
+
+.brand h1 {
+    margin: 0;
+    font-size: clamp(1.4rem, 3vw, 2rem);
 }
 
 .header-buttons {
-    width: 30%;
     display: flex;
-    justify-content: space-around;
+    gap: 0.75rem;
 }
 
-.header-buttons button {
-    margin-right: 20px;
-    margin-left: 20px;
+.header-buttons [role=button] {
+    padding: 0.45rem 1.2rem;
+    font-weight: 700;
+}
+
+.header-buttons .active {
+    background-color: var(--primary);
+    color: var(--primary-inverse);
+}
+
+.app > main.container {
+    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+.main-footer {
+    padding-bottom: 1.5rem;
+    text-align: center;
+    color: var(--muted-color);
 }

@@ -1,0 +1,41 @@
+.events-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.events-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    margin-bottom: 0.5rem;
+}
+
+.events-header p {
+    color: var(--muted-color);
+}
+
+.events-filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    align-items: end;
+    padding: 1.25rem 1.5rem 0.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    background: var(--glass);
+}
+
+.events-filters select {
+    background-color: var(--form-element-background-color);
+}
+
+.events-filters-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 1.25rem;
+}
+
+.events-count {
+    color: var(--muted-color);
+    font-size: 0.9rem;
+}

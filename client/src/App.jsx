@@ -1,35 +1,29 @@
 import React from 'react'
-import { useRoutes, Link } from 'react-router-dom'
+import { useRoutes, Link, NavLink } from 'react-router-dom'
 import Locations from './pages/Locations'
 import LocationEvents from './pages/LocationEvents'
 import Events from './pages/Events'
+import NotFound from './pages/NotFound'
 import './App.css'
 
 const App = () => {
+  // One dynamic route serves every location; its slug comes from the database
   let element = useRoutes([
     {
       path: '/',
       element: <Locations />
     },
     {
-      path: '/echolounge',
-      element: <LocationEvents index={1} />
-    },
-    {
-      path: '/houseofblues',
-      element: <LocationEvents index={2} />
-    },
-    {
-      path: '/pavilion',
-      element: <LocationEvents index={3} />
-    },
-    {
-      path: '/americanairlines',
-      element: <LocationEvents index={4} />
+      path: '/locations/:slug',
+      element: <LocationEvents />
     },
     {
       path: '/events',
       element: <Events />
+    },
+    {
+      path: '*',
+      element: <NotFound />
     }
   ])
 
@@ -37,17 +31,24 @@ const App = () => {
     <div className='app'>
 
       <header className='main-header'>
-        <h1>UnityGrid Plaza</h1>
+        <Link to='/' className='brand'>
+          <img src='/logo.png' alt='' />
+          <h1>Cloud ID Community</h1>
+        </Link>
 
-        <div className='header-buttons'>
-          <Link to='/' role='button'>Home</Link>
-          <Link to='/events' role='button'>Events</Link>
-        </div>
+        <nav className='header-buttons' aria-label='Main'>
+          <NavLink to='/' end role='button' className='outline'>Map</NavLink>
+          <NavLink to='/events' role='button' className='outline'>Events</NavLink>
+        </nav>
       </header>
 
-      <main>
+      <main className='container'>
         {element}
       </main>
+
+      <footer className='main-footer container'>
+        <small>Cloud photos from Wikimedia Commons contributors. See the README for credits.</small>
+      </footer>
     </div>
   )
 }

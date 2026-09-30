@@ -1,78 +1,71 @@
-@import url('https://fonts.googleapis.com/css2?family=Rock+Salt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
 
-#root {
-    background: url('./assets/unitygrid.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
+/* Sky palette: deep night blue → dusk purple (from the Cloud ID logo) → cloud white */
+:root[data-theme=dark] {
+    --sky-night: #0a1330;
+    --sky-deep: #13224d;
+    --sky-dusk: #3b2f6b;
+    --logo-purple: #8e67ad;
+    --lavender: #c7a8e6;
+    --cloud-white: #f3f6fb;
+    --sunrise: #f7b267;
+    --storm-red: #e5646e;
+    --glass: rgba(255, 255, 255, 0.06);
+    --glass-border: rgba(255, 255, 255, 0.14);
+
+    --font-family: 'Nunito Sans', system-ui, sans-serif;
+    --background-color: var(--sky-night);
+    --color: #d9e1ef;
+    --muted-color: #a4b0c8;
+    --h1-color: var(--cloud-white);
+    --h2-color: var(--cloud-white);
+    --h3-color: var(--cloud-white);
+    --primary: var(--lavender);
+    --primary-hover: #dcc6f2;
+    --primary-focus: rgba(199, 168, 230, 0.3);
+    --primary-inverse: var(--sky-night);
+    --secondary: #9fb3d9;
+    --secondary-hover: var(--cloud-white);
+    --card-background-color: var(--glass);
+    --card-border-color: var(--glass-border);
+    --form-element-background-color: rgba(10, 19, 48, 0.6);
+    --form-element-border-color: var(--glass-border);
+    --form-element-focus-color: var(--primary-focus);
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(ellipse at 20% 0%, rgba(142, 103, 173, 0.35), transparent 55%),
+        radial-gradient(ellipse at 90% 10%, rgba(247, 178, 103, 0.12), transparent 45%),
+        linear-gradient(180deg, var(--sky-night) 0%, var(--sky-deep) 55%, var(--sky-dusk) 100%);
     background-attachment: fixed;
-    background-color: var(--secondary-color);
-    font-family: Nunito Sans, Verdana, sans-serif;
-    height: 100vh;
-    --main-color: rgb(217, 29, 242);
-    --secondary-color: rgb(3, 1, 64);
-    --primary: var(--main-color);
-    --primary-hover: rgb(111, 28, 166);
-    --primary-focus: rgb(217, 29, 242);
-    --secondary: var(--secondary-color);
-    --secondary-hover: rgb(4, 66, 191);
-    --secondary-focus: rgb(111, 28, 166);
-    --h1-color: white;
-    --h2-color: white;
-    --h3-color: white;
-    --card-background-color: none;
-    --form-element-background-color: white;
-    --form-element-border-color: var(--main-color);
-    --form-element-color: black;
-    --form-element-placeholder-color: black;
-    --form-element-active-border-color: var(--secondary-color);
-    --form-element-active-background-color: white;
 }
 
-#root h1, #root h2, #root h3 {
-    text-transform: uppercase;
-    margin-bottom: 0px;
+h1, h2, h3 {
+    font-family: 'Fraunces', Georgia, serif;
+    letter-spacing: 0.01em;
 }
 
-#root h1 {
-    font-family: Rock Salt, cursive;
-    font-size: 3em;
-    font-weight: bold;
-    text-shadow: 3px 3px 4px black;
+.icon {
+    width: 1.05em;
+    height: 1.05em;
+    flex-shrink: 0;
+    vertical-align: -0.15em;
 }
 
-#root h2 {
-    font-family: Nunito Sans, Verdana, sans-serif;
-    font-size: 2em;
-    font-weight: 800;
+.section-heading {
+    margin: 2.5rem 0 1rem;
 }
 
-#root h3 {
-    font-family: Nunito Sans, Verdana, sans-serif;
-    font-size: 1.3em;
-    font-weight: 800;
+.section-heading .count {
+    color: var(--muted-color);
+    font-weight: 400;
 }
 
-#root main {
-    display: flex;
-    justify-content: center;
-}
-
-#root [role=button] {
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: 1.5em;
-    border: 2px solid white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#root article {
-    padding: 0px;
-}
-
-#root select {
-    width: 400px;
+/* Shared responsive card grid for events */
+.event-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
 }

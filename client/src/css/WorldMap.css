@@ -1,0 +1,175 @@
+/* Markers are HTML links laid over the SVG map so labels stay crisp and
+   readable at any size; --x / --y come from the map projection. */
+.world-map {
+    position: relative;
+    width: 100%;
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    background: radial-gradient(ellipse at 50% 40%, rgba(142, 103, 173, 0.18), rgba(10, 19, 48, 0.6) 75%);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* The SVG's viewBox sets the map's height; markers are placed over it */
+.world-map svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 16px;
+}
+
+.world-map-graticule {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.07);
+    stroke-width: 0.6;
+}
+
+.world-map-land {
+    fill: rgba(199, 168, 230, 0.22);
+    stroke: rgba(243, 246, 251, 0.35);
+    stroke-width: 0.6;
+}
+
+.map-marker {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--cloud-white);
+    text-decoration: none;
+    z-index: 1;
+}
+
+.map-marker:hover,
+.map-marker:focus-visible,
+.map-marker.is-active {
+    z-index: 5;
+}
+
+.map-marker--label-left {
+    flex-direction: row-reverse;
+    transform: translate(calc(-100% + 1.1rem), -50%);
+}
+
+.map-marker:not(.map-marker--label-left) {
+    transform: translate(-1.1rem, -50%);
+}
+
+.map-marker-pin {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 2.2rem;
+    height: 2.2rem;
+    border-radius: 50%;
+    background: var(--cloud-white);
+    color: var(--logo-purple);
+    box-shadow: 0 0 0 4px rgba(142, 103, 173, 0.45);
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.map-marker-pin .icon {
+    width: 1.3rem;
+    height: 1.3rem;
+    fill: currentColor;
+}
+
+/* Soft pulsing halo so the markers read as "clickable" */
+.map-marker-pin::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px solid var(--lavender);
+    animation: marker-pulse 2.4s ease-out infinite;
+}
+
+@keyframes marker-pulse {
+    from { transform: scale(1); opacity: 0.8; }
+    to { transform: scale(1.9); opacity: 0; }
+}
+
+.map-marker-label {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25rem 0.65rem;
+    border-radius: 8px;
+    background: rgba(10, 19, 48, 0.85);
+    border: 1px solid var(--glass-border);
+    white-space: nowrap;
+    line-height: 1.25;
+    font-size: 0.85rem;
+}
+
+.map-marker--label-left .map-marker-label {
+    align-items: flex-end;
+}
+
+.map-marker-label small {
+    display: none;
+    color: var(--lavender);
+    font-size: 0.75rem;
+}
+
+.map-marker:hover .map-marker-pin,
+.map-marker:focus-visible .map-marker-pin,
+.map-marker.is-active .map-marker-pin {
+    transform: scale(1.15);
+    background: var(--sunrise);
+    color: var(--sky-night);
+}
+
+.map-marker:hover .map-marker-label small,
+.map-marker:focus-visible .map-marker-label small,
+.map-marker.is-active .map-marker-label small {
+    display: block;
+}
+
+.map-marker:focus-visible {
+    outline: none;
+}
+
+.map-marker:focus-visible .map-marker-label {
+    outline: 2px solid var(--sunrise);
+}
+
+@media (max-width: 700px) {
+    .map-marker-pin {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    .map-marker-pin .icon {
+        width: 0.95rem;
+        height: 0.95rem;
+    }
+
+    /* Labels would collide on a small map: show pins only, reveal the
+       label on the active marker (the location cards below carry names). */
+    .map-marker-label {
+        display: none;
+        font-size: 0.7rem;
+        padding: 0.15rem 0.4rem;
+    }
+
+    .map-marker:hover .map-marker-label,
+    .map-marker:focus-visible .map-marker-label,
+    .map-marker.is-active .map-marker-label {
+        display: flex;
+    }
+
+    .map-marker:not(.map-marker--label-left) {
+        transform: translate(-0.75rem, -50%);
+    }
+
+    .map-marker--label-left {
+        transform: translate(calc(-100% + 0.75rem), -50%);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .map-marker-pin::after {
+        animation: none;
+    }
+}

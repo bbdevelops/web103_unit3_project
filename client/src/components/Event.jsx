@@ -1,59 +1,55 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import Icon from './Icon'
+import useNow from '../hooks/useNow'
+import { formatEventDate, formatEventTime, getTimeRemaining, formatCountdown } from '../utils/dates'
 import '../css/Event.css'
 
-const Event = (props) => {
+const audienceClass = {
+    'All levels': 'badge--all',
+    'Amateur': 'badge--amateur',
+    'Professional': 'badge--pro'
+}
 
-    const [event, setEvent] = useState([])
-    const [time, setTime] = useState([])
-    const [remaining, setRemaining] = useState([])
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const eventData = await EventsAPI.getEventsById(props.id)
-                setEvent(eventData)
-            }
-            catch (error) {
-                throw error
-            }
-        }) ()
-    }, [])
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const result = await dates.formatTime(event.time)
-                setTime(result)
-            }
-            catch (error) {
-                throw error
-            }
-        }) ()
-    }, [event])
-
-    useEffect(() => {
-        (async () => {
-            try {
-                const timeRemaining = await dates.formatRemainingTime(event.remaining)
-                setRemaining(timeRemaining)
-                dates.formatNegativeTimeRemaining(remaining, event.id)
-            }
-            catch (error) {
-                throw error
-            }
-        }) ()
-    }, [event])
+const Event = ({ event, showLocation = false }) => {
+    const now = useNow()
+    const remaining = getTimeRemaining(event.start_time, now)
+    const cardClass = remaining.isPast ? 'event-card event-card--past' : 'event-card'
 
     return (
-        <article className='event-information'>
-            <img src={event.image} />
+        <article className={cardClass}>
+            <div className='event-card-image'>
+                <img src={event.image_url} alt='' loading='lazy' />
+                {remaining.isPast && <span className='event-card-ribbon'>Passed</span>}
+            </div>
 
-            <div className='event-information-overlay'>
-                <div className='text'>
-                    <h3>{event.title}</h3>
-                    <p><i className="fa-regular fa-calendar fa-bounce"></i> {event.date} <br /> {time}</p>
-                    <p id={`remaining-${event.id}`}>{remaining}</p>
-                </div>
+            <div className='event-card-body'>
+                <span className={`badge ${audienceClass[event.audience]}`}>
+                    <Icon name='users' /> {event.audience}
+                </span>
+
+                <h3 className='event-card-title'>{event.title}</h3>
+                <p className='event-card-host'>Hosted by {event.host}</p>
+
+                {showLocation && (
+                    <p className='event-card-meta'>
+                        <Icon name='pin' />
+                        <Link to={`/locations/${event.location_slug}`}>{event.location_name}</Link>
+                    </p>
+                )}
+
+                <p className='event-card-meta'>
+                    <Icon name='calendar' />
+                    <time dateTime={event.start_time}>
+                        {formatEventDate(event.start_time, event.timezone)} · {formatEventTime(event.start_time, event.timezone)}
+                    </time>
+                </p>
+
+                <p className='event-card-countdown'>
+                    <Icon name='clock' /> {formatCountdown(remaining)}
+                </p>
+
+                <p className='event-card-description'>{event.description}</p>
             </div>
         </article>
     )

@@ -1,0 +1,35 @@
+.status-message {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 2rem auto;
+    padding: 1.5rem 2rem;
+    max-width: 640px;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    background: var(--glass);
+}
+
+.status-message p:last-child {
+    margin-bottom: 0;
+}
+
+.status-message--error {
+    flex-direction: column;
+    border-color: rgba(229, 100, 110, 0.5);
+}
+
+.status-spinner {
+    width: 1.5rem;
+    height: 1.5rem;
+    border: 3px solid var(--glass-border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}

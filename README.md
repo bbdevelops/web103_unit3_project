@@ -4,18 +4,16 @@ Submitted by: **Brian Brown**
 
 About this web app: **Cloud ID Community is a virtual gathering place for cloud watchers of every kind: backyard skygazers, storm spotters, meteorologists, and atmospheric scientists. An interactive world map marks five of the planet's great cloud-watching spots: Tornado Alley, Burketown (home of the Morning Glory roll cloud), Mount Fuji, Tromsø, and Table Mountain. Click a spot to see the community's events there, from beginner dawn watches to research seminars, each with a live countdown.**
 
-Time spent: **X** hours
+Time spent: **6** hours
 
 ## Required Features
 
 The following **required** functionality is completed:
 
-<!-- Make sure to check off completed functionality below -->
-
 - [x] **The web app uses React to display data from the API**
 - [x] **The web app is connected to a PostgreSQL database, with an appropriately structured Events table**
-  - [ ]  **NOTE: Your walkthrough added to the README must include a view of your Render dashboard demonstrating that your Postgres database is available**
-  - [ ]  **NOTE: Your walkthrough added to the README must include a demonstration of your table contents. Use the psql command 'SELECT * FROM tablename;' to display your table contents.**
+  - [x]  **NOTE: Your walkthrough added to the README must include a view of your Render dashboard demonstrating that your Postgres database is available**
+  - [x]  **NOTE: Your walkthrough added to the README must include a demonstration of your table contents. Use the psql command 'SELECT * FROM tablename;' to display your table contents.**
 - [x] **The web app displays a title.**
 - [x] **Website includes a visual interface that allows users to select a location they would like to view.**
   - [x] *Note: A non-visual list of links to different locations is insufficient.* 
@@ -43,15 +41,11 @@ The following **additional** features are implemented:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented required features:
+<a href="https://vimeo.com/1232914237">Video Walkthrough</a>
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='client\public\images\walkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
-GIF created with ...  GIF tool here
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
+GIF created with ezGIF
 
 ## Running Locally
 
